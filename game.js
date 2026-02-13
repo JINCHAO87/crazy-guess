@@ -251,12 +251,6 @@ function startMotionDetection() {
     // 重置状态
     deviceState = 'normal';
     lastBeta = 0;
-    // 初始化角度显示
-    const angleDisplay = document.getElementById('angleDisplay');
-    if (angleDisplay) {
-        angleDisplay.textContent = '0';
-    }
-    console.log('重力感应已启动');
 }
 
 function stopMotionDetection() {
@@ -267,12 +261,6 @@ function handleOrientation(event) {
     if (!gameState.isPlaying || cooldown) return;
 
     const beta = event.beta; // 前后倾斜角度 (-180 到 180)
-
-    // 显示当前角度到界面上
-    const angleDisplay = document.getElementById('angleDisplay');
-    if (angleDisplay) {
-        angleDisplay.textContent = Math.round(beta);
-    }
 
     // 控制台日志(每秒一次)
     if (!window.lastLogTime || Date.now() - window.lastLogTime > 1000) {
@@ -290,7 +278,6 @@ function handleOrientation(event) {
         if (beta > 130) {
             // 向下倾斜超过130度 = 猜对 ✅
             deviceState = 'tilted_down';
-            console.log(`✅ 触发猜对! 角度: ${Math.round(beta)}°`);
             handleCorrect();
             cooldown = true;
             setTimeout(() => {
@@ -300,7 +287,6 @@ function handleOrientation(event) {
         } else if (beta < 50) {
             // 向上倾斜到50度以下 = 跳过 ⏭️
             deviceState = 'tilted_up';
-            console.log(`⏭️ 触发跳过! 角度: ${Math.round(beta)}°`);
             handleSkip();
             cooldown = true;
             setTimeout(() => {
