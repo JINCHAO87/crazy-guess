@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,21 +9,22 @@
   <title>疯狂猜词 - 亲子游戏</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
     <!-- 开始界面 -->
     <div class="screen start-screen active">
       <h1 class="game-title">🎮 疯狂猜词</h1>
-      <p class="game-subtitle">和女儿一起玩的猜词游戏</p>
-      
+      <p class="game-subtitle">和女儿一起玩的猜词游戏 <span style="font-size: 0.8em; opacity: 0.7;">v1.1</span></p>
+
       <div class="time-options">
         <button class="time-btn" data-time="30">30秒</button>
         <button class="time-btn selected" data-time="60">60秒</button>
         <button class="time-btn" data-time="90">90秒</button>
       </div>
-      
+
       <button class="start-btn" onclick="startGame()">🚀 开始游戏</button>
-      
+
       <div class="instructions">
         <h3>📖 游戏规则</h3>
         <ul>
@@ -40,12 +42,12 @@
         <div class="timer" id="timer">60</div>
         <div class="score" id="score">0分</div>
       </div>
-      
+
       <div class="word-display">
         <div class="word" id="word">准备好了吗?</div>
         <div class="category" id="category">即将开始...</div>
       </div>
-      
+
       <div class="gesture-hints">
         <div class="hint">
           <div class="hint-icon">⬆️</div>
@@ -61,7 +63,7 @@
     <!-- 结束界面 -->
     <div class="screen end-screen">
       <h2 class="end-title">🎉 游戏结束!</h2>
-      
+
       <div class="stats">
         <div class="final-score" id="finalScore">0</div>
         <div class="stat-details">
@@ -75,7 +77,7 @@
           </div>
         </div>
       </div>
-      
+
       <button class="restart-btn" onclick="restartGame()">🔄 再玩一次</button>
     </div>
   </div>
@@ -85,4 +87,5 @@
 
   <script src="game.js"></script>
 </body>
+
 </html>
