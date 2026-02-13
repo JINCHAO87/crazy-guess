@@ -268,17 +268,17 @@ function handleOrientation(event) {
     if (deviceState === 'normal') {
         // 从正常状态检测翻转
         if (beta > 120) {
-            // 手机向前翻超过120度(屏幕朝下) = 猜对
-            deviceState = 'tilted_up';
+            // 手机向下倾斜超过120度 = 猜对 ✅
+            deviceState = 'tilted_down';
             handleCorrect();
             cooldown = true;
             setTimeout(() => {
                 cooldown = false;
                 deviceState = 'normal';
             }, 1000);
-        } else if (beta < -60) {
-            // 手机向后翻超过60度(屏幕朝上) = 跳过
-            deviceState = 'tilted_down';
+        } else if (beta < -40) {
+            // 手机向上倾斜超过40度 = 跳过 ⏭️
+            deviceState = 'tilted_up';
             handleSkip();
             cooldown = true;
             setTimeout(() => {
