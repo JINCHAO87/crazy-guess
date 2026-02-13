@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>疯狂猜词 - 亲子游戏</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 开始界面 -->
+    <div class="screen start-screen active">
+      <h1 class="game-title">🎮 疯狂猜词</h1>
+      <p class="game-subtitle">和女儿一起玩的猜词游戏</p>
+      
+      <div class="time-options">
+        <button class="time-btn" data-time="30">30秒</button>
+        <button class="time-btn selected" data-time="60">60秒</button>
+        <button class="time-btn" data-time="90">90秒</button>
+      </div>
+      
+      <button class="start-btn" onclick="startGame()">🚀 开始游戏</button>
+      
+      <div class="instructions">
+        <h3>📖 游戏规则</h3>
+        <ul>
+          <li>一人看词描述,一人猜</li>
+          <li>手机向上翻 ⬆️ = 猜对了</li>
+          <li>手机向下翻 ⬇️ = 跳过这个</li>
+          <li>在时间内猜对越多越好!</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 游戏界面 -->
+    <div class="screen game-screen">
+      <div class="game-header">
+        <div class="timer" id="timer">60</div>
+        <div class="score" id="score">0分</div>
+      </div>
+      
+      <div class="word-display">
+        <div class="word" id="word">准备好了吗?</div>
+        <div class="category" id="category">即将开始...</div>
+      </div>
+      
+      <div class="gesture-hints">
+        <div class="hint">
+          <div class="hint-icon">⬆️</div>
+          <div>猜对了</div>
+        </div>
+        <div class="hint">
+          <div class="hint-icon">⬇️</div>
+          <div>跳过</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 结束界面 -->
+    <div class="screen end-screen">
+      <h2 class="end-title">🎉 游戏结束!</h2>
+      
+      <div class="stats">
+        <div class="final-score" id="finalScore">0</div>
+        <div class="stat-details">
+          <div class="stat-item">
+            <div class="stat-value" id="correctCount">0</div>
+            <div class="stat-label">✅ 猜对</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="skipCount">0</div>
+            <div class="stat-label">⏭️ 跳过</div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="restart-btn" onclick="restartGame()">🔄 再玩一次</button>
+    </div>
+  </div>
+
+  <!-- 反馈提示 -->
+  <div class="feedback" id="feedback"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>
