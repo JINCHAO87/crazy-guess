@@ -262,13 +262,18 @@ function handleOrientation(event) {
     if (!gameState.isPlaying || cooldown) return;
 
     const beta = event.beta; // 前后倾斜角度 (-180 到 180)
-    // beta: 0 = 水平, 90 = 竖直向前, -90 = 竖直向后, 180/-180 = 倒置
+
+    // 调试:显示当前角度(每秒最多显示一次)
+    if (!window.lastLogTime || Date.now() - window.lastLogTime > 1000) {
+        console.log(`当前角度 beta: ${Math.round(beta)}°`);
+        window.lastLogTime = Date.now();
+    }
 
     // 状态机逻辑
     if (deviceState === 'normal') {
         // 从正常状态检测翻转
-        if (beta > 120) {
-            // 手机向下倾斜超过120度 = 猜对 ✅
+        if (beta > 100) {
+            // 手机向下倾斜超过100度 = 猜对 ✅
             deviceState = 'tilted_down';
             handleCorrect();
             cooldown = true;
@@ -276,8 +281,8 @@ function handleOrientation(event) {
                 cooldown = false;
                 deviceState = 'normal';
             }, 1000);
-        } else if (beta < -40) {
-            // 手机向上倾斜超过40度 = 跳过 ⏭️
+        } else if (beta < -80) {
+            // 手机向上倾斜超过80度 = 跳过 ⏭️
             deviceState = 'tilted_up';
             handleSkip();
             cooldown = true;
