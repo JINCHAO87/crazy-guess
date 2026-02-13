@@ -40,6 +40,10 @@
     <div class="screen game-screen">
       <div class="game-header">
         <div class="timer" id="timer">60</div>
+        <div
+          style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 20px; color: white; font-size: 1.2rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,0.15); min-width: 100px; text-align: center;">
+          <span id="angleDisplay">--</span>°
+        </div>
         <div class="score" id="score">0分</div>
       </div>
 
@@ -57,12 +61,6 @@
           <div class="hint-icon">⬇️</div>
           <div>跳过</div>
         </div>
-      </div>
-
-      <!-- 调试信息 -->
-      <div id="debugInfo"
-        style="margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; color: white; font-size: 14px; text-align: center;">
-        角度: <span id="angleDisplay">--</span>°
       </div>
     </div>
 
