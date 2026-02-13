@@ -263,6 +263,12 @@ function handleOrientation(event) {
 
     const beta = event.beta; // 前后倾斜角度 (-180 到 180)
 
+    // 显示当前角度到界面上
+    const angleDisplay = document.getElementById('angleDisplay');
+    if (angleDisplay) {
+        angleDisplay.textContent = Math.round(beta);
+    }
+
     // 调试:显示当前角度(每秒最多显示一次)
     if (!window.lastLogTime || Date.now() - window.lastLogTime > 1000) {
         console.log(`当前角度 beta: ${Math.round(beta)}°`);

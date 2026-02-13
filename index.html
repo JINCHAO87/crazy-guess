@@ -15,7 +15,7 @@
     <!-- 开始界面 -->
     <div class="screen start-screen active">
       <h1 class="game-title">🎮 疯狂猜词</h1>
-      <p class="game-subtitle">和女儿一起玩的猜词游戏 <span style="font-size: 0.8em; opacity: 0.7;">v1.3</span></p>
+      <p class="game-subtitle">和女儿一起玩的猜词游戏 <span style="font-size: 0.8em; opacity: 0.7;">v1.4 调试版</span></p>
 
       <div class="time-options">
         <button class="time-btn" data-time="30">30秒</button>
@@ -57,6 +57,12 @@
           <div class="hint-icon">⬇️</div>
           <div>跳过</div>
         </div>
+      </div>
+
+      <!-- 调试信息 -->
+      <div id="debugInfo"
+        style="margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; color: white; font-size: 14px; text-align: center;">
+        角度: <span id="angleDisplay">--</span>°
       </div>
     </div>
 
