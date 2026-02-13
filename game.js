@@ -251,6 +251,11 @@ function startMotionDetection() {
     // 重置状态
     deviceState = 'normal';
     lastBeta = 0;
+    // 初始化角度显示
+    const angleDisplay = document.getElementById('angleDisplay');
+    if (angleDisplay) {
+        angleDisplay.textContent = '0';
+    }
     console.log('重力感应已启动');
 }
 
