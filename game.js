@@ -243,11 +243,15 @@ function updateTimerDisplay() {
 
 // ==================== 重力感应控制 ====================
 let lastBeta = 0;
-let motionThreshold = 30; // 倾斜角度阈值
+let deviceState = 'normal'; // 设备状态: normal(正常), tilted_up(向上倾斜), tilted_down(向下倾斜)
 let cooldown = false;
 
 function startMotionDetection() {
     window.addEventListener('deviceorientation', handleOrientation);
+    // 重置状态
+    deviceState = 'normal';
+    lastBeta = 0;
+    console.log('重力感应已启动');
 }
 
 function stopMotionDetection() {
@@ -258,18 +262,30 @@ function handleOrientation(event) {
     if (!gameState.isPlaying || cooldown) return;
 
     const beta = event.beta; // 前后倾斜角度 (-180 到 180)
+    // beta: 0 = 水平, 90 = 竖直向前, -90 = 竖直向后, 180/-180 = 倒置
 
-    // 向上翻转(屏幕朝下) - 猜对
-    if (beta > 90 + motionThreshold && lastBeta < 90) {
-        handleCorrect();
-        cooldown = true;
-        setTimeout(() => cooldown = false, 800);
-    }
-    // 向下翻转(屏幕朝上) - 跳过
-    else if (beta < -motionThreshold && lastBeta > -motionThreshold) {
-        handleSkip();
-        cooldown = true;
-        setTimeout(() => cooldown = false, 800);
+    // 状态机逻辑
+    if (deviceState === 'normal') {
+        // 从正常状态检测翻转
+        if (beta > 120) {
+            // 手机向前翻超过120度(屏幕朝下) = 猜对
+            deviceState = 'tilted_up';
+            handleCorrect();
+            cooldown = true;
+            setTimeout(() => {
+                cooldown = false;
+                deviceState = 'normal';
+            }, 1000);
+        } else if (beta < -60) {
+            // 手机向后翻超过60度(屏幕朝上) = 跳过
+            deviceState = 'tilted_down';
+            handleSkip();
+            cooldown = true;
+            setTimeout(() => {
+                cooldown = false;
+                deviceState = 'normal';
+            }, 1000);
+        }
     }
 
     lastBeta = beta;
