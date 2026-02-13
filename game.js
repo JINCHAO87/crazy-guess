@@ -274,27 +274,33 @@ function handleOrientation(event) {
         angleDisplay.textContent = Math.round(beta);
     }
 
-    // 调试:显示当前角度(每秒最多显示一次)
+    // 控制台日志(每秒一次)
     if (!window.lastLogTime || Date.now() - window.lastLogTime > 1000) {
         console.log(`当前角度 beta: ${Math.round(beta)}°`);
         window.lastLogTime = Date.now();
     }
 
-    // 状态机逻辑
+    // 重力感应逻辑
+    // 竖直握持 ≈ 90°
+    // 向下倾斜(屏幕朝地) > 90°,最大180°
+    // 向上倾斜(屏幕朝天) < 90°,最小0°
+
     if (deviceState === 'normal') {
         // 从正常状态检测翻转
-        if (beta > 100) {
-            // 手机向下倾斜超过100度 = 猜对 ✅
+        if (beta > 130) {
+            // 向下倾斜超过130度 = 猜对 ✅
             deviceState = 'tilted_down';
+            console.log(`✅ 触发猜对! 角度: ${Math.round(beta)}°`);
             handleCorrect();
             cooldown = true;
             setTimeout(() => {
                 cooldown = false;
                 deviceState = 'normal';
             }, 1000);
-        } else if (beta < -80) {
-            // 手机向上倾斜超过80度 = 跳过 ⏭️
+        } else if (beta < 50) {
+            // 向上倾斜到50度以下 = 跳过 ⏭️
             deviceState = 'tilted_up';
+            console.log(`⏭️ 触发跳过! 角度: ${Math.round(beta)}°`);
             handleSkip();
             cooldown = true;
             setTimeout(() => {
