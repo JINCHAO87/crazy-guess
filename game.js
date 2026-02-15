@@ -85,8 +85,8 @@ const wordDatabase = {
 
 // ==================== 游戏状态管理 ====================
 let gameState = {
-    selectedTime: 60,
-    currentTime: 60,
+    selectedTime: 120,
+    currentTime: 120,
     score: 0,
     correctCount: 0,
     skipCount: 0,
